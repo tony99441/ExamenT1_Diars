@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ExamenT1.BD.Mapeo;
+using ExamenT1.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,10 @@ namespace ExamenT1.BD
 {
     public class T1Context : DbContext
     {
-       // public DbSet<Cuenta> Cuentas { get; set; }
+        public DbSet<Persona> Personas
+        { get; set; }
+        public DbSet<Ciudad> Ciudades { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
@@ -20,7 +25,10 @@ namespace ExamenT1.BD
         {
             base.OnModelCreating(modelBuilder);
 
-           // modelBuilder.ApplyConfiguration(new CuentaConfiguration());
+            modelBuilder.ApplyConfiguration(new CiudadMapeo());
+            modelBuilder.ApplyConfiguration(new PersonaMapeo());
+
+
         }
 
     }
